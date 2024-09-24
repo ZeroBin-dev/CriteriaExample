@@ -3,11 +3,13 @@ package com.criteria.criteriaexample.service;
 import com.criteria.criteriaexample.model.Order;
 import com.criteria.criteriaexample.model.Product;
 import com.criteria.criteriaexample.model.User;
+import com.criteria.criteriaexample.repository.UserRepository;
 import com.criteria.criteriaexample.vo.UserOrderVO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,6 +18,16 @@ import java.util.List;
 public class UserService {
 
   private final EntityManager entityManager;
+  private final UserRepository userRepository;
+
+  @Transactional
+  public User registerUser(User user){
+    if(userRepository.existsByEmail(user.getEmail())){
+      throw new IllegalArgumentException("이미 사용 중인 이메일입니다.");
+    }
+
+    return userRepository.save(user);
+  }
 
   public List<UserOrderVO> getUserWithOrders() {
     CriteriaBuilder cb = entityManager.getCriteriaBuilder();
