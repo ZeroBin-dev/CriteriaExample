@@ -24,10 +24,19 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.mariadb.jdbc:mariadb-java-client'
 
+    // Basic
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // JPA
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // AOP
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+
+    // MariaDB
+    implementation 'org.mariadb.jdbc:mariadb-java-client'
 
     // lombok
     annotationProcessor 'org.projectlombok:lombok'
